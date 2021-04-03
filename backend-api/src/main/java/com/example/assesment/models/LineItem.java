@@ -1,20 +1,27 @@
 package com.example.assesment.models;
 
+/**
+ * This class represents the Cart Item and it contains the product
+ * that was added to the cart item and its quantity in cartons
+ * and pieces
+ */
 public class LineItem {
 
-    private Product product;
     private int quantity;
-
+    private Product product;
     private int numberOfCartons;
     private int numberOfUnits;
-
     private boolean discounted;
-
     private double lineItemTotal;
 
-    public LineItem() {
-    }
+    public LineItem() { }
 
+    /**
+     *
+     * @param product the product that corresponds to the line item
+     * @param numberOfCartons the no: of cartons added
+     * @param numberOfUnits the no: of pieces added
+     */
     public LineItem(Product product, int numberOfCartons, int numberOfUnits) {
         this.product = product;
         this.numberOfCartons = numberOfCartons;
