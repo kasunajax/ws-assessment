@@ -1,0 +1,46 @@
+<h2>Cart</h2>
+<p>Loading: {{loading$ | async}}</p>
+<p>Error: {{error$ | async}}</p>
+<h3>Cart Items</h3>
+<ul *ngIf="(cart$ | async) as cart">
+  <li *ngFor="let lineItem of cart.lineItems">
+    {{lineItem.product.name}} :-
+    <br>
+<!--    <br>-->
+<!--    Price Per Carton: {{lineItem.product.price}}-->
+<!--    <br>-->
+<!--    Discounts: {{lineItem?.discounted ? '10%': 'N/A'}}-->
+<!--    <br>-->
+<!--    Line Total: {{lineItem?.lineItemTotal}}-->
+<!--    <br>-->
+
+    By Cartons: <input type="number" [value]="lineItem.numberOfCartons" #numberofCartonsInput disabled/>
+    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, -1, 0, cart.lineItems)">-</button>
+    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, +1, 0, cart.lineItems)">+</button>
+
+    <br>
+    By Units: <input type="number" [value]="lineItem.numberOfUnits" #numberofUnitsInput disabled/>
+    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, 0, -1, cart.lineItems)">-</button>
+    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, 0, +1, cart.lineItems)">+</button>
+
+    <br>
+    <button (click)="removeFromCart(lineItem.product, cart.lineItems)">X</button>
+  </li>
+</ul>
+
+<h3>Summary</h3>
+<ul *ngIf="(cart$ | async) as cart">
+  <li *ngFor="let lineItem of cart.lineItems">
+    {{lineItem.product.name}} :-
+    <br>
+    Price Per Carton: {{lineItem.product.price}}
+    <br>
+    Discounts: {{lineItem?.discounted ? '10%': 'N/A'}}
+    <br>
+    Line Total: {{lineItem?.lineItemTotal}}
+    <br>
+    <br>
+  </li>
+  <p>Net Total: {{cart.netTotal}}</p>
+</ul>
+

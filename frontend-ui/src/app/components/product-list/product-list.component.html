@@ -1,0 +1,14 @@
+<h2>Products</h2>
+<p>Loading: {{loading$ | async}}</p>
+<p>Error: {{error$ | async}}</p>
+<button (click)="refreshProducts()">Refresh</button>
+<ul *ngIf="(lineItems$ | async) as lineItems">
+  <div *ngFor="let product of (products$ | async)">
+    <li *ngIf="!isProductPresent(product)">
+      {{product.name}} {{product.price}}
+      <br>
+      Units Per Carton: {{product.unitsPerCarton}}
+      <button (click)="addToCart(product, lineItems)">Add To Cart</button>
+    </li>
+  </div>
+</ul>
