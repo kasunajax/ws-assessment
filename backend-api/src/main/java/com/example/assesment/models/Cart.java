@@ -7,6 +7,13 @@ public class Cart {
     private List<LineItem> lineItems;
     private double netTotal;
 
+    public Cart() {
+    }
+
+    public Cart(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
+
     public List<LineItem> getLineItems() {
         return lineItems;
     }

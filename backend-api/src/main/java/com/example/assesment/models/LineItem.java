@@ -12,6 +12,15 @@ public class LineItem {
 
     private double lineItemTotal;
 
+    public LineItem() {
+    }
+
+    public LineItem(Product product, int numberOfCartons, int numberOfUnits) {
+        this.product = product;
+        this.numberOfCartons = numberOfCartons;
+        this.numberOfUnits = numberOfUnits;
+    }
+
     public Product getProduct() {
         return product;
     }

@@ -29,31 +29,18 @@ public class PriceEngine {
         List<Product> list = new ArrayList<>();
         Product p1 = new Product();
         p1.setId(1);
-        p1.setPrice(100);
+        p1.setPrice(175);
         p1.setUnitsPerCarton(20);
-        p1.setName("Product 1");
+        p1.setName("Penguin Ears");
 
         Product p2 = new Product();
         p2.setId(2);
-        p2.setPrice(200);
+        p2.setPrice(825);
         p2.setUnitsPerCarton(5);
-        p2.setName("Product 2");
-
-//        Product p3 = new Product();
-//        p3.setId(3);
-//        p3.setPrice(300);
-//        p3.setName("M3");
-//
-//        Product p4 = new Product();
-//        p4.setPrice(400);
-//        p4.setId(4);
-//        p4.setName("M4");
-
+        p2.setName("Horse Shoe");
 
         list.add(p1);
         list.add(p2);
-        // list.add(p3);
-        // list.add(p4);
 
         return list;
     }
