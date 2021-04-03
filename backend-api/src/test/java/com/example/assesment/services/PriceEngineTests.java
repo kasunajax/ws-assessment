@@ -17,8 +17,8 @@ public class PriceEngineTests {
     private final ProductRepository mockProductRepository = mock(ProductRepository.class);
 
     /**
-     * Text Case 01
-     * Expects 175.0 when 1 carton and 0 pieces of product id = 1 (Penguin Ears) ears were purchased
+     * Text Case 01 <br>
+     * Expects 175.0 when 1 carton and 0 pieces of product id = 1 (Penguin Ears) ears were purchased <br>
      */
     @Test
     @DisplayName("Text Case 01")
@@ -32,8 +32,8 @@ public class PriceEngineTests {
     }
 
     /**
-     * Text Case 02
-     * Expects 175.0 x 2 when 2 cartons and 0 pieces of product id = 1 (Penguin Ears) were purchased
+     * Text Case 02 <br>
+     * Expects 175.0 x 2 when 2 cartons and 0 pieces of product id = 1 (Penguin Ears) were purchased <br>
      */
     @Test
     @DisplayName("Text Case 02")
@@ -47,9 +47,9 @@ public class PriceEngineTests {
     }
 
     /**
-     * Text Case 03
-     * (Must apply 10% discount on carton price 175.0) when 3 cartons and 0 pieces of product id = 1 (Penguin Ears) were purchased
-     * Expects (175.0 x 0.9) x 3 = 472.5
+     * Text Case 03 <br>
+     * (Must apply 10% discount on carton price 175.0) when 3 cartons and 0 pieces of product id = 1 (Penguin Ears) were purchased <br>
+     * Expects (175.0 x 0.9) x 3 = 472.5 <br>
      */
     @Test
     @DisplayName("Text Case 03")
@@ -63,9 +63,9 @@ public class PriceEngineTests {
     }
 
     /**
-     * Text Case 04
-     * (Must add the discount)  when 3 cartons and 0 pieces of product id = 1 (Penguin Ears) were purchased
-     * Doesn't expect 175.0 x 3 = 525.0
+     * Text Case 04 <br>
+     * (Must add the discount)  when 3 cartons and 0 pieces of product id = 1 (Penguin Ears) were purchased <br>
+     * Doesn't expect 175.0 x 3 = 525.0 <br>
      */
     @Test
     @DisplayName("Text Case 04")
@@ -79,9 +79,9 @@ public class PriceEngineTests {
     }
 
     /**
-     * Text Case 05
-     * (Must Include the Labour Cost Only) when 1 carton and 10 pieces of product id = 1 (Penguin Ears) ears were purchased
-     * Expects 175.0 x 1 + (175.0 / 20 x 1.3 x 10)
+     * Text Case 05 <br>
+     * (Must Include the Labour Cost Only) when 1 carton and 10 pieces of product id = 1 (Penguin Ears) ears were purchased <br>
+     * Expects 175.0 x 1 + (175.0 / 20 x 1.3 x 10) <br>
      */
     @Test
     @DisplayName("Text Case 05")
@@ -95,10 +95,10 @@ public class PriceEngineTests {
     }
 
     /**
-     * Text Case 06
-     * (Must apply 10% discount on carton price 175.0 + Labour Cost)
-     * when 3 carton and 10 pieces of product id = 1 (Penguin Ears) ears were purchased
-     * Expects (175.0 x 0.9) x 3 + ((175.0 x 0.9) / 20 x 1.3) discount
+     * Text Case 06 <br>
+     * (Must apply 10% discount on carton price 175.0 + Labour Cost) <br>
+     * when 3 carton and 10 pieces of product id = 1 (Penguin Ears) ears were purchased <br>
+     * Expects (175.0 x 0.9) x 3 + ((175.0 x 0.9) / 20 x 1.3) discount <br>
      */
     @Test
     @DisplayName("Text Case 06")
@@ -112,8 +112,8 @@ public class PriceEngineTests {
     }
 
     /**
-     * Text Case 07
-     * Expects 825.0 when 1 carton and 0 pieces of product id = 2 (Horse Shoe) ears were purchased
+     * Text Case 07 <br>
+     * Expects 825.0 when 1 carton and 0 pieces of product id = 2 (Horse Shoe) ears were purchased <br>
      */
     @Test
     @DisplayName("Text Case 07")
@@ -127,8 +127,8 @@ public class PriceEngineTests {
     }
 
     /**
-     * Text Case 08
-     * Expects 825.0 x 2 when 2 cartons and 0 pieces of product id = 2 (Horse Shoe) were purchased
+     * Text Case 08 <br>
+     * Expects 825.0 x 2 when 2 cartons and 0 pieces of product id = 2 (Horse Shoe) were purchased <br>
      */
     @Test
     @DisplayName("Text Case 08")
@@ -142,9 +142,9 @@ public class PriceEngineTests {
     }
 
     /**
-     * Text Case 09
-     * (Must apply 10% discount on carton price 825.0) when 3 cartons and 0 pieces of product id = 2 (Horse Shoe) were purchased
-     * Expects (825.0 x 0.9) x 3 = 2227.5
+     * Text Case 09 <br>
+     * (Must apply 10% discount on carton price 825.0) when 3 cartons and 0 pieces of product id = 2 (Horse Shoe) were purchased <br>
+     * Expects (825.0 x 0.9) x 3 = 2227.5 <br>
      */
     @Test
     @DisplayName("Text Case 09")
@@ -158,9 +158,9 @@ public class PriceEngineTests {
     }
 
     /**
-     * Text Case 10
-     * (Must add the discount)  when 3 cartons and 0 pieces of product id = 2 (Horse Shoe) were purchased
-     * Doesn't expect 825.0 x 3 = 2475.0
+     * Text Case 10 <br>
+     * (Must add the discount)  when 3 cartons and 0 pieces of product id = 2 (Horse Shoe) were purchased <br>
+     * Doesn't expect 825.0 x 3 = 2475.0 <br>
      */
     @Test
     @DisplayName("Text Case 10")
@@ -174,9 +174,9 @@ public class PriceEngineTests {
     }
 
     /**
-     * Text Case 11
-     * (Must Include the Labour Cost Only) when 1 carton and 2 pieces of product id = 2 (Horse Shoe) were purchased
-     * Expects 825.0 x 1 + (825.0 / 5 x 1.3) x 2
+     * Text Case 11 <br>
+     * (Must Include the Labour Cost Only) when 1 carton and 2 pieces of product id = 2 (Horse Shoe) were purchased <br>
+     * Expects 825.0 x 1 + (825.0 / 5 x 1.3) x 2 <br>
      */
     @Test
     @DisplayName("Text Case 11")
@@ -190,10 +190,10 @@ public class PriceEngineTests {
     }
 
     /**
-     * Text Case 12
-     * (Must apply 10% discount on carton price 825.0 + Labour Cost)
-     * when 3 carton and 3 pieces of product id = 2 (Horse Shoe) were purchased
-     * Expects (825.0 x 0.9) x 3 + ((825.0 x 0.9) / 5 x 1.3) x 3 discount
+     * Text Case 12 <br>
+     * (Must apply 10% discount on carton price 825.0 + Labour Cost) <br>
+     * when 3 carton and 3 pieces of product id = 2 (Horse Shoe) were purchased <br>
+     * Expects (825.0 x 0.9) x 3 + ((825.0 x 0.9) / 5 x 1.3) x 3 discount <br>
      */
     @Test
     @DisplayName("Text Case 12")
@@ -207,12 +207,12 @@ public class PriceEngineTests {
     }
 
     /**
-     * Test Case 13
-     * Cart contains two line items ie. Penguin Ears, and HorseShoe
-     * Line Item 1 - Penguin Ears (id = 1, cartons = 1, pieces = 0, lineTotal1 = 175.0 * 1)
-     * Line Item 2 - Horse Shoe (id = 2, cartons = 1, pieces = 0, lineTotal2 = 825.0 * 1)
-     * Net Total = lineTotal1 + lineTotal2 = 175.0 + 825.0 = 1000.0
-     * Expected Output = 1000.0
+     * Test Case 13 <br>
+     * Cart contains two line items ie. Penguin Ears, and HorseShoe <br>
+     * Line Item 1 - Penguin Ears (id = 1, cartons = 1, pieces = 0, lineTotal1 = 175.0 * 1) <br>
+     * Line Item 2 - Horse Shoe (id = 2, cartons = 1, pieces = 0, lineTotal2 = 825.0 * 1) <br>
+     * Net Total = lineTotal1 + lineTotal2 = 175.0 + 825.0 = 1000.0 <br>
+     * Expected Output = 1000.0 <br>
      */
     @Test
     @DisplayName("Test Case 13")
@@ -231,31 +231,31 @@ public class PriceEngineTests {
     }
 
     /**
-     * Test Case 14 (Ultimate)
-     * Cart contains two line items ie. Penguin Ears, and HorseShoe
+     * Test Case 14 (Ultimate)<br>
+     * Cart contains two line items ie. Penguin Ears, and HorseShoe <br>
      *
-     * Line Item 1 - Penguin Ears (id = 1, cartons = 3, pieces = 10, lineTotal1 = ?)
-     *             - 1. Apply 10% discount (3 or more cartons) => newCartonPrice = 175.0 * 0.9 = 157.5
-     *             - 2. Units per carton = 20
-     *             - 3. New price per piece = 157.5 / 20 = 7.875
-     *             - 4. Apply 1.3% increment (Buying pieces also) => newPricePerPiece = 7.875 * 1.3 = 10.2375
-     *             - 5. Total cost of cartons = 3 * 157.5 = 472.5
-     *             - 6. Total cost of pieces = 10 * 10.2375 = 102.375
-     *             - 7. Line total = 102.375 + 472.5 = 574.875
-     *
-     * Line Item 2 - Horse Shoe (id = 2, cartons = 3, pieces = 10, lineTotal2 = ?)
-     *             - No: of pieces are 10 (Not optimised because Units per carton = 5)
-     *             - Before calculating the total the cost is optimised
-     *             - Optimised selection => Horse Shoe (id = 2, cartons = 5, lineTotal2= ?)
-     *             - Calculating Line Total:-
-     *             - Calculating Line Total:-
-     *             - 1. Apply 10% discount (3 or more cartons) => newCartonPrice = 825.0 * 0.9 = 742.5
-     *             - 2. Units per carton = 5
-     *             - 4. NO 1.3 % Increment since only cartons are purchased
-     *             - 5. Total cost of cartons = 5 * 742.5 = 3712.5
-     *             - 7. Line total = 3712.5
-     *
-     * Net Total = lineTotal1 + lineTotal2 = 574.875 + 3712.5 = 4287.375
+     * Line Item 1 - Penguin Ears (id = 1, cartons = 3, pieces = 10, lineTotal1 = ?) <br>
+     *             - 1. Apply 10% discount (3 or more cartons) => newCartonPrice = 175.0 * 0.9 = 157.5 <br>
+     *             - 2. Units per carton = 20 <br>
+     *             - 3. New price per piece = 157.5 / 20 = 7.875 <br>
+     *             - 4. Apply 1.3% increment (Buying pieces also) => newPricePerPiece = 7.875 * 1.3 = 10.2375 <br>
+     *             - 5. Total cost of cartons = 3 * 157.5 = 472.5 <br>
+     *             - 6. Total cost of pieces = 10 * 10.2375 = 102.375 <br>
+     *             - 7. Line total = 102.375 + 472.5 = 574.875 <br>
+     * <br>
+     * Line Item 2 - Horse Shoe (id = 2, cartons = 3, pieces = 10, lineTotal2 = ?) <br>
+     *             - No: of pieces are 10 (Not optimised because Units per carton = 5) <br>
+     *             - Before calculating the total the cost is optimised <br>
+     *             - Optimised selection => Horse Shoe (id = 2, cartons = 5, lineTotal2= ?) <br>
+     *             - Calculating Line Total:- <br>
+     *             - Calculating Line Total:- <br>
+     *             - 1. Apply 10% discount (3 or more cartons) => newCartonPrice = 825.0 * 0.9 = 742.5 <br>
+     *             - 2. Units per carton = 5 <br>
+     *             - 4. NO 1.3 % Increment since only cartons are purchased <br>
+     *             - 5. Total cost of cartons = 5 * 742.5 = 3712.5 <br>
+     *             - 7. Line total = 3712.5 <br>
+     * <br>
+     * Net Total = lineTotal1 + lineTotal2 = 574.875 + 3712.5 = 4287.375 <br>
      * Expected Output = 4287.375
      */
     @Test
