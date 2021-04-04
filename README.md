@@ -38,3 +38,23 @@ environment.urls.base=<http://localhost:8080/api>
 ```
 
 Then build and run the application
+
+1. Spring App
+```
+cd ./backend-api
+(Linux) gradle build
+(Windows) gradlew.bat build
+cd ./build/libs
+java -jar <application>.jar
+```
+
+1. Setup these in the Angular app environments.ts file 
+```
+cd ./frontend-ui
+ng build --prod
+
+```
+NOTE: Run it in a web server such that the api url should match the value specified in ORIGIN_ALLOWED_FRONTEND to support CORS
+
+### UI
+![Image of the UI](./ui.png)
