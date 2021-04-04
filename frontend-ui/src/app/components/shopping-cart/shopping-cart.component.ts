@@ -17,6 +17,7 @@ export class ShoppingCartComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<boolean>;
   cart$: Observable<any>;
+  cart: any;
 
   displayedColumns = ['name', 'price', 'discounted', 'lineItemTotal', 'action'];
 
@@ -24,19 +25,20 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cart$ = this.store.select('shopping', 'cart');
+    this.cart$.subscribe(cart => this.cart = cart);
     this.lineItems$ =  this.store.select('shopping', 'cart', 'lineItems');
     this.products$ =  this.store.select('shopping', 'products', 'list');
     this.loading$ =  this.store.select('shopping', 'cart', 'loading');
     this.error$ =  this.store.select('shopping', 'cart', 'errorMessage');
   }
 
-  setQuantity(product, numberOfCartons, numberOfUnits, changeOfCartons, changeOfUnits, lineItems): void {
+  setQuantity(product, numberOfCartons, numberOfUnits, changeOfCartons, changeOfUnits): void {
 
     const newNumberOfCartons = Number(numberOfCartons) + changeOfCartons;
     const newNumberOfUnits = Number(numberOfUnits) + changeOfUnits;
 
     const item: LineItem = { product, quantity: 1, numberOfCartons: newNumberOfCartons, numberOfUnits: newNumberOfUnits };
-    this.store.dispatch(updateCart({payload: { lineItems, newLineItem: item }}));
+    this.store.dispatch(updateCart({payload: { lineItems: this.cart.lineItems, newLineItem: item }}));
   }
 
   removeFromCart(product, lineItems): void {
@@ -44,13 +46,21 @@ export class ShoppingCartComponent implements OnInit {
     this.store.dispatch(updateCart({payload: { lineItems, newLineItem: item }}));
   }
 
-  updateCart(product, numberOfCartons, numberOfUnits, lineItems): void {
+  // updateCart(product, numberOfCartons, numberOfUnits, lineItems): void {
+  //
+  //   const newNumberOfCartons = Number(numberOfCartons);
+  //   const newNumberOfUnits = Number(numberOfUnits);
+  //
+  //   const item: LineItem = { product, quantity: 1, numberOfCartons: newNumberOfCartons, numberOfUnits: newNumberOfUnits };
+  //   this.store.dispatch(updateCart({payload: { lineItems, newLineItem: item }}));
+  // }
 
-    const newNumberOfCartons = Number(numberOfCartons);
-    const newNumberOfUnits = Number(numberOfUnits);
+  updateCart(product, value): void {
 
-    const item: LineItem = { product, quantity: 1, numberOfCartons: newNumberOfCartons, numberOfUnits: newNumberOfUnits };
-    this.store.dispatch(updateCart({payload: { lineItems, newLineItem: item }}));
+    const newNumberOfUnits = Number(value);
+
+    const item: LineItem = { product, quantity: 1, numberOfCartons: 0, numberOfUnits: newNumberOfUnits };
+    this.store.dispatch(updateCart({payload: { lineItems: this.cart.lineItems, newLineItem: item }}));
   }
 
 }

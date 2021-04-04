@@ -38,8 +38,8 @@ export class ProductListComponent implements OnInit {
     this.store.dispatch(loadProducts());
   }
 
-  addToCart(product, lineItems): void {
-    const item: LineItem = { product, quantity: 1, numberOfCartons: 0, numberOfUnits: 1 };
+  addToCart(product, lineItems, initialValue): void {
+    const item: LineItem = { product, quantity: 1, numberOfCartons: 0, numberOfUnits: initialValue };
     this.store.dispatch(updateCart({payload: { lineItems, newLineItem: item }}));
   }
 

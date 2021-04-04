@@ -20,6 +20,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import { ShoppingSummaryComponent } from './components/shopping-summary/shopping-summary.component';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ import {MatDividerModule} from '@angular/material/divider';
     MatCardModule,
     MatButtonModule,
     MatTableModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

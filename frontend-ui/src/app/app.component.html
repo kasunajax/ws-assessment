@@ -1,4 +1,7 @@
-<mat-card fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom: 50px">
+<div style="height: 10px;">
+  <mat-progress-bar *ngIf="(loadingCart$ | async) || (loadingProducts$ | async)" mode="indeterminate"></mat-progress-bar>
+</div>
+<mat-card fxLayout="row" fxLayoutAlign="space-between center" style="margin: 20px">
   <div>
     Net Total: <b>LKR {{(netTotal$ | async | number:'1.2-2')}}</b>
   </div>
@@ -7,8 +10,10 @@
   </div>
 </mat-card>
 
-<div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="20px">
-  <app-product-list></app-product-list>
-  <app-shopping-cart></app-shopping-cart>
-  <app-shopping-summary></app-shopping-summary>
+<div
+  style="margin: 0 20px"
+  fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="50px">
+  <app-product-list fxFlex="33.3"></app-product-list>
+  <app-shopping-cart fxFlex="33.3"></app-shopping-cart>
+  <app-shopping-summary fxFlex="33.3"></app-shopping-summary>
 </div>

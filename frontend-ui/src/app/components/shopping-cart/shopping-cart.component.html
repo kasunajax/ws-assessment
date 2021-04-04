@@ -1,42 +1,71 @@
 
 
+
 <div *ngIf="(cart$ | async) as cart"
   fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px"
 >
   <h2>Cart</h2>
-  <mat-card *ngFor="let lineItem of cart.lineItems">
 
+  <mat-card *ngIf="(lineItems$ | async).length == 0">
     <mat-card-header>
+      <mat-card-title>No items in the cart !</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card *ngFor="let lineItem of lineItems$ | async " style="width: 100%">
+
+    <mat-card-header style= "width: 100%" >
       <mat-card-title>{{lineItem.product.name}}</mat-card-title>
+      <mat-card-subtitle >
+        <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px">
+          <mat-label>Total quantity in units</mat-label>
+          <input matInput class="manual-input" type="number" [value]="lineItem.product.unitsPerCarton * lineItem.numberOfCartons + lineItem.numberOfUnits"  #amt/>
+          <span matSuffix>units</span>
+        </mat-form-field>
+<!--        <input matInput class="manual-input" type="number" [value]="lineItem.product.unitsPerCarton * lineItem.numberOfCartons + lineItem.numberOfUnits"  #amt/>-->
+        <button mat-stroked-button class="manual-input-btn"  (click)="updateCart(lineItem.product,amt.value)">Apply</button>
+      </mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content
-    fxLayout="column"
-    fxLayoutAlign="center stretch"
-    fxLayoutGap="10px"
-    >
+    <mat-card-content >
+      <div     fxLayout="center"
+               fxLayoutAlign="space-between center"
+               fxLayoutGap="10px">
 
-      <div>
-        <span>By Cartons:</span>
+
+      <div
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      >
+        <div class="spinner-label">Cartons:</div>
 <!--        <input type="number" [min]="0" [value]="lineItem.numberOfCartons" (change)="updateCart(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, cart.lineItems)" #numberofCartonsInput>-->
-        <button (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, -1, 0, cart.lineItems)">-</button>
+        <div>
+        <button class="control-btn" (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, -1, 0)">-</button>
         <span class="input-text" #numberofCartonsInput disabled>{{lineItem.numberOfCartons}}</span>
-        <button (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, +1, 0, cart.lineItems)">+</button>
-
+        <button class="control-btn" (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, +1, 0)">+</button>
+        </div>
       </div>
-      <div>
-        <span>By Units:</span>
+      <div
+        fxLayout="column"
+        fxLayoutAlign="center center"
+      >
+        <div class="spinner-label">Units:</div>
 <!--        <input type="number" [min]="1" [value]="lineItem.numberOfUnits" (change)="updateCart(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, cart.lineItems)" #numberofUnitsInput>-->
-        <button (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, 0, -1, cart.lineItems)">-</button>
+        <div>
+        <button class="control-btn" (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, 0, -1)">-</button>
         <span class="input-text" #numberofUnitsInput disabled>{{lineItem.numberOfUnits}}</span>
-        <button (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, 0, +1, cart.lineItems)">+</button>
+        <button class="control-btn" (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, 0, +1)">+</button>
+        </div>
+      </div>
 
+      <div>
+        <button (click)="removeFromCart(lineItem.product, cart.lineItems)" mat-icon-button aria-label="Delete button">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
       </div>
     </mat-card-content>
 
-    <mat-card-actions>
-      <button style="width: 100%" (click)="removeFromCart(lineItem.product, cart.lineItems)" mat-stroked-button color="warn">Remove</button>
-    </mat-card-actions>
   </mat-card>
 </div>
 

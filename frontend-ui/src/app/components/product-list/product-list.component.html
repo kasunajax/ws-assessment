@@ -4,24 +4,55 @@
 <!--<button (click)="refreshProducts()">Refresh</button>-->
 
 <h2 style="text-align: center">Products</h2>
+
+<div fxLayout="column">
+
+<div>
+  <ul>
+  <li>If you purchase single units, the price is acquired using the carton price multiplied by an increase of 30% (1.3). (to compensate for manual labor)</li>
+    <li>If you purchase 3 cartons or more, you will receive a 10% discount off the carton price.</li>
+  </ul>
+</div>
+
 <div *ngIf="(lineItems$ | async) as lineItems"
      fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
-  <div *ngFor="let product of (products$ | async)" >
+  <div *ngFor="let product of (products$ | async)"style="width: 100%" >
     <mat-card >
       <mat-card-header>
         <mat-card-title>{{product.name}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        Units Per Carton: {{product.unitsPerCarton}}
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <p>Carton Price <b>{{product.price}}</b></p>
+          <p>Units Per Carton: <b>{{product.unitsPerCarton}}</b></p>
+        </div>
+
       </mat-card-content>
       <mat-card-actions>
-        <button *ngIf="!isProductPresent(product)" style="width: 100%" (click)="addToCart(product, lineItems)" mat-stroked-button color="primary">Add to cart</button>
+
+        <div *ngIf="!isProductPresent(product)" >
+          <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px">
+            <mat-label>Enter required qty in units (1-50)</mat-label>
+            <input matInput class="manual-input" type="number" min="1" max="50" value="1" #amt/>
+            <span matSuffix>units</span>
+          </mat-form-field>
+          <!--        <input matInput class="manual-input" type="number" [value]="lineItem.product.unitsPerCarton * lineItem.numberOfCartons + lineItem.numberOfUnits"  #amt/>-->
+          <!--        <button mat-stroked-button class="manual-input-btn"  (click)="updateCart(lineItem.product,amt.value)">Apply</button>-->
+
+          <button (click)="addToCart(product, lineItems, amt.value)" mat-stroked-button color="primary">Add to cart</button>
+
+        </div>
+
+        <div style="text-align: center" *ngIf="isProductPresent(product)">
+          <mat-icon>shopping_cart</mat-icon>
+          <p>In Cart</p>
+        </div>
       </mat-card-actions>
     </mat-card>
   </div>
 </div>
 
-
+</div>
 <!--<ul *ngIf="(lineItems$ | async) as lineItems">-->
 <!--  <div *ngFor="let product of (products$ | async)">-->
 <!--    <li *ngIf="!isProductPresent(product)">-->
