@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * A service class that contains the business logic related
@@ -32,7 +31,7 @@ public class PriceEngine {
         return productRepository.findAll();
     }
 
-    public void optimizeLineItem(LineItem lineItem) {
+    private void optimizeLineItem(LineItem lineItem) {
 
         /*
         Here, the product object that corresponds to the line item is directly fetched from the database
@@ -48,16 +47,16 @@ public class PriceEngine {
         lineItem.setNumberOfUnits(newNumberOfUnits);
     }
 
-    public void optimizeCart(Cart cart) {
+    private void optimizeCart(Cart cart) {
         cart.getLineItems().forEach(this::optimizeLineItem);
     }
 
-    public void calculateNetTotal(Cart cart) {
+    private void calculateNetTotal(Cart cart) {
         cart.getLineItems().forEach(this::calculateLineTotal);
         cart.calculateNetTotal();
     }
 
-    public void calculateLineTotal(LineItem item) {
+    private void calculateLineTotal(LineItem item) {
 
         /*
         Here, the product object that corresponds to the line item is directly fetched from the database
