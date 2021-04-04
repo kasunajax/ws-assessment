@@ -20,7 +20,7 @@ public class PriceEngine {
     private static final double PURCHASE_DISCOUNT_PERCENTAGE = 0.9; // Rate applied for carton price when 3 or more cartons are in the cart
     private static final int NO_OF_CARTONS_REQUIRED_FOR_DISCOUNT = 3; // Minimum no: of cartons required to receive the discounted rate
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
     public PriceEngine(ProductRepository productRepository) {
@@ -96,8 +96,10 @@ public class PriceEngine {
         // Checks if Product is already in the cart.
         if(cart.isProductInTheCart(newItem.getProduct())) {
 
-            if(newItem.getNumberOfCartons() == 0 && newItem.getNumberOfUnits() == 0) {
-                // If newItem contains 0 cartons and 0 pieces, then find and remove it from the cart
+            if(
+                    (newItem.getNumberOfCartons() == 0 && newItem.getNumberOfUnits() == 0) // If newItem contains 0 cartons and 0 pieces, then find and remove it from the cart
+                    || newItem.getNumberOfCartons() < 0 // If newItem contains negative cartons, then find and remove it from the cart
+            ) {
                 cart.getLineItems().removeIf(lineItem -> lineItem.getProduct().getId() == newItem.getProduct().getId());
             } else {
                 // Else get the existing line item and update

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LineItem } from '../../store/models/line-item.model';
-import { Product } from '../../store/models/product.model';
-import { Store } from '@ngrx/store';
-import { loadProducts, updateCart } from '../../store/actions/shopping.actions';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {LineItem} from '../../store/models/line-item.model';
+import {Product} from '../../store/models/product.model';
+import {Store} from '@ngrx/store';
+import {loadProducts, updateCart} from '../../store/actions/shopping.actions';
 
 @Component({
   selector: 'app-product-list',
@@ -20,14 +20,15 @@ export class ProductListComponent implements OnInit {
   productsInCart: Array<Product>;
   cart$: Observable<any>;
 
-  constructor(private store: Store<{ shopping: any }>) {}
+  constructor(private store: Store<{ shopping: any }>) {
+  }
 
   ngOnInit(): void {
     this.cart$ = this.store.select('shopping', 'cart');
-    this.lineItems$ =  this.store.select('shopping', 'cart', 'lineItems');
-    this.products$ =  this.store.select('shopping', 'products', 'list');
-    this.loading$ =  this.store.select('shopping', 'products', 'loading');
-    this.error$ =  this.store.select('shopping', 'products', 'errorMessage');
+    this.lineItems$ = this.store.select('shopping', 'cart', 'lineItems');
+    this.products$ = this.store.select('shopping', 'products', 'list');
+    this.loading$ = this.store.select('shopping', 'products', 'loading');
+    this.error$ = this.store.select('shopping', 'products', 'errorMessage');
     this.refreshProducts();
     this.lineItems$.subscribe(lineItems => {
       this.productsInCart = lineItems.map(lineItem => lineItem.product);
@@ -39,8 +40,8 @@ export class ProductListComponent implements OnInit {
   }
 
   addToCart(product, lineItems, initialValue): void {
-    const item: LineItem = { product, quantity: 1, numberOfCartons: 0, numberOfUnits: initialValue };
-    this.store.dispatch(updateCart({payload: { lineItems, newLineItem: item }}));
+    const item: LineItem = {product, quantity: 1, numberOfCartons: 0, numberOfUnits: initialValue};
+    this.store.dispatch(updateCart({payload: {lineItems, newLineItem: item}}));
   }
 
   isProductPresent(product): boolean {

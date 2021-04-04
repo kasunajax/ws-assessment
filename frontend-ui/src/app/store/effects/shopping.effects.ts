@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {of} from 'rxjs';
+import {catchError, map, mergeMap} from 'rxjs/operators';
 import {ShoppingService} from '../../services/shopping.service';
 import {
   loadProducts,
@@ -43,5 +43,6 @@ export class ShoppingEffects {
   constructor(
     private actions$: Actions,
     private shoppingService: ShoppingService
-  ) {}
+  ) {
+  }
 }

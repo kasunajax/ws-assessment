@@ -1,6 +1,9 @@
 <div style="height: 10px;">
   <mat-progress-bar *ngIf="(loadingCart$ | async) || (loadingProducts$ | async)" mode="indeterminate"></mat-progress-bar>
 </div>
+<div class="error-container" *ngIf="(cartError$ | async) || (productsError$ | async)" >
+  {{(cartError$ | async) || (productsError$ | async)}}
+</div>
 <mat-card fxLayout="row" fxLayoutAlign="space-between center" style="margin: 20px">
   <div>
     Net Total: <b>LKR {{(netTotal$ | async | number:'1.2-2')}}</b>
@@ -9,6 +12,14 @@
   <mat-icon [matBadge]="(lineItems$ | async).length" matBadgeColor="warn">shopping_cart</mat-icon>
   </div>
 </mat-card>
+
+
+<div style="margin: 20px">
+  <ul>
+    <li>If you purchase single units, the price is acquired using the carton price multiplied by an increase of 30% (1.3). (to compensate for manual labor)</li>
+    <li>If you purchase 3 cartons or more, you will receive a 10% discount off the carton price.</li>
+  </ul>
+</div>
 
 <div
   style="margin: 0 20px"

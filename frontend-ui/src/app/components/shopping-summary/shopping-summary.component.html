@@ -5,6 +5,7 @@
 
       <b>{{lineItem.product.name}}</b>
       <p>Price Per Carton: <b> LKR {{lineItem.product.price | number:'1.2-2'}}</b></p>
+      <p>Items: <b> {{lineItem.numberOfCartons}} cartons & {{lineItem.numberOfUnits}} units</b></p>
       <p>Discounts: <b>{{lineItem?.discounted ? '10%': '0%'}}</b></p>
       <p>Line Total: <b> LKR {{lineItem?.lineItemTotal | number:'1.2-2'}}</b></p>
       <mat-divider></mat-divider>
