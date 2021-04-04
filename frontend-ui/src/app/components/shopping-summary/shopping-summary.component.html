@@ -1,0 +1,18 @@
+<h2>Summary</h2>
+<mat-card>
+  <div *ngIf="(cart$ | async) as cart">
+    <div *ngFor="let lineItem of cart.lineItems" style="padding-top: 15px">
+
+      <b>{{lineItem.product.name}}</b>
+      <p>Price Per Carton: <b> LKR {{lineItem.product.price | number:'1.2-2'}}</b></p>
+      <p>Items: <b> {{lineItem.numberOfCartons}} cartons & {{lineItem.numberOfUnits}} units</b></p>
+      <p>Discounts: <b>{{lineItem?.discounted ? '10%': '0%'}}</b></p>
+      <p>Line Total: <b> LKR {{lineItem?.lineItemTotal | number:'1.2-2'}}</b></p>
+      <mat-divider></mat-divider>
+    </div>
+    <h3 style="padding-top: 20px; margin-bottom: 0"><b>Net Total: LKR {{cart.netTotal | number:'1.2-2'}}</b></h3>
+  </div>
+</mat-card>
+
+
+

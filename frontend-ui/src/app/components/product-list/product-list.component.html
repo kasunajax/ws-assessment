@@ -1,0 +1,41 @@
+<h2 style="text-align: center">Products</h2>
+
+<div fxLayout="column">
+
+<div *ngIf="(lineItems$ | async) as lineItems"
+     fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <div *ngFor="let product of (products$ | async)"style="width: 100%" >
+    <mat-card >
+      <mat-card-header>
+        <mat-card-title>{{product.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <p>Carton Price <b>{{product.price}}</b></p>
+          <p>Units Per Carton: <b>{{product.unitsPerCarton}}</b></p>
+        </div>
+
+      </mat-card-content>
+      <mat-card-actions>
+
+        <div *ngIf="!isProductPresent(product)" >
+          <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px">
+            <mat-label>Enter required qty in units (1-50)</mat-label>
+            <input matInput class="manual-input" type="number" min="1" max="50" value="1" #amt/>
+            <span matSuffix>units</span>
+          </mat-form-field>
+
+          <button (click)="addToCart(product, lineItems, amt.value)" mat-stroked-button ><mat-icon>shopping_cart</mat-icon> Add to cart</button>
+
+        </div>
+
+        <div style="text-align: center" *ngIf="isProductPresent(product)">
+          <mat-icon>shopping_cart</mat-icon>
+          <p>In Cart</p>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+</div>
