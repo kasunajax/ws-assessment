@@ -1,46 +1,111 @@
-<h2>Cart</h2>
-<p>Loading: {{loading$ | async}}</p>
-<p>Error: {{error$ | async}}</p>
-<h3>Cart Items</h3>
-<ul *ngIf="(cart$ | async) as cart">
-  <li *ngFor="let lineItem of cart.lineItems">
-    {{lineItem.product.name}} :-
-    <br>
-<!--    <br>-->
-<!--    Price Per Carton: {{lineItem.product.price}}-->
-<!--    <br>-->
-<!--    Discounts: {{lineItem?.discounted ? '10%': 'N/A'}}-->
-<!--    <br>-->
-<!--    Line Total: {{lineItem?.lineItemTotal}}-->
+
+
+<div *ngIf="(cart$ | async) as cart"
+  fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px"
+>
+  <h2>Cart</h2>
+  <mat-card *ngFor="let lineItem of cart.lineItems">
+
+    <mat-card-header>
+      <mat-card-title>{{lineItem.product.name}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content
+    fxLayout="column"
+    fxLayoutAlign="center stretch"
+    fxLayoutGap="10px"
+    >
+
+      <div>
+        <span>By Cartons:</span>
+<!--        <input type="number" [min]="0" [value]="lineItem.numberOfCartons" (change)="updateCart(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, cart.lineItems)" #numberofCartonsInput>-->
+        <button (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, -1, 0, cart.lineItems)">-</button>
+        <span class="input-text" #numberofCartonsInput disabled>{{lineItem.numberOfCartons}}</span>
+        <button (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, +1, 0, cart.lineItems)">+</button>
+
+      </div>
+      <div>
+        <span>By Units:</span>
+<!--        <input type="number" [min]="1" [value]="lineItem.numberOfUnits" (change)="updateCart(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, cart.lineItems)" #numberofUnitsInput>-->
+        <button (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, 0, -1, cart.lineItems)">-</button>
+        <span class="input-text" #numberofUnitsInput disabled>{{lineItem.numberOfUnits}}</span>
+        <button (click)="setQuantity(lineItem.product, numberofCartonsInput.innerHTML, numberofUnitsInput.innerHTML, 0, +1, cart.lineItems)">+</button>
+
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button style="width: 100%" (click)="removeFromCart(lineItem.product, cart.lineItems)" mat-stroked-button color="warn">Remove</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+
+
+
+<!--<h3>Cart Items</h3>-->
+<!--<ul *ngIf="(cart$ | async) as cart">-->
+<!--  <li *ngFor="let lineItem of cart.lineItems">-->
+<!--    {{lineItem.product.name}} :- -->
 <!--    <br>-->
 
-    By Cartons: <input type="number" [value]="lineItem.numberOfCartons" #numberofCartonsInput disabled/>
-    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, -1, 0, cart.lineItems)">-</button>
-    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, +1, 0, cart.lineItems)">+</button>
+<!--    By Cartons: <input type="number" [value]="lineItem.numberOfCartons" #numberofCartonsInput disabled/>-->
+<!--    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, -1, 0, cart.lineItems)">-</button>-->
+<!--    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, +1, 0, cart.lineItems)">+</button>-->
 
-    <br>
-    By Units: <input type="number" [value]="lineItem.numberOfUnits" #numberofUnitsInput disabled/>
-    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, 0, -1, cart.lineItems)">-</button>
-    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, 0, +1, cart.lineItems)">+</button>
+<!--    <br>-->
+<!--    By Units: <input type="number" [value]="lineItem.numberOfUnits" #numberofUnitsInput disabled/>-->
+<!--    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, 0, -1, cart.lineItems)">-</button>-->
+<!--    <button (click)="setQuantity(lineItem.product, numberofCartonsInput.value, numberofUnitsInput.value, 0, +1, cart.lineItems)">+</button>-->
 
-    <br>
-    <button (click)="removeFromCart(lineItem.product, cart.lineItems)">X</button>
-  </li>
-</ul>
+<!--    <br>-->
+<!--    <button (click)="removeFromCart(lineItem.product, cart.lineItems)">X</button>-->
+<!--  </li>-->
+<!--</ul>-->
 
-<h3>Summary</h3>
-<ul *ngIf="(cart$ | async) as cart">
-  <li *ngFor="let lineItem of cart.lineItems">
-    {{lineItem.product.name}} :-
-    <br>
-    Price Per Carton: {{lineItem.product.price}}
-    <br>
-    Discounts: {{lineItem?.discounted ? '10%': 'N/A'}}
-    <br>
-    Line Total: {{lineItem?.lineItemTotal}}
-    <br>
-    <br>
-  </li>
-  <p>Net Total: {{cart.netTotal}}</p>
-</ul>
+
+
+
+
+
+
+<!--<table mat-table [dataSource]="lineItems$ | async" class="mat-elevation-z8">-->
+
+<!--  &lt;!&ndash;- Note that these columns can be defined in any order.-->
+<!--        The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
+
+<!--  &lt;!&ndash; Position Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="name">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Name </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.product.name}} </td>-->
+<!--  </ng-container>-->
+
+<!--  &lt;!&ndash; Position Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="price">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Price </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.product.price}} </td>-->
+<!--  </ng-container>-->
+
+<!--  &lt;!&ndash; Name Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="discounted">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Discounted </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.discounted}} </td>-->
+<!--  </ng-container>-->
+
+<!--  &lt;!&ndash; Weight Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="lineItemTotal">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Line Total </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.lineItemTotal}} </td>-->
+<!--  </ng-container>-->
+
+<!--  &lt;!&ndash; Symbol Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="action">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Action </th>-->
+<!--    <td mat-cell *matCellDef="let element"> X </td>-->
+<!--  </ng-container>-->
+
+<!--  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+<!--</table>-->
 

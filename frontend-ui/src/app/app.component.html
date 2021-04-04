@@ -1,3 +1,14 @@
-<p>Net Total: {{netTotal$ | async}} ({{totalItems}})</p>
-<app-product-list></app-product-list>
-<app-shopping-cart></app-shopping-cart>
+<mat-card fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom: 50px">
+  <div>
+    Net Total: <b>LKR {{(netTotal$ | async | number:'1.2-2')}}</b>
+  </div>
+  <div style="margin-right: 20px; margin-top: 10px;">
+  <mat-icon [matBadge]="(lineItems$ | async).length" matBadgeColor="warn">shopping_cart</mat-icon>
+  </div>
+</mat-card>
+
+<div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="20px">
+  <app-product-list></app-product-list>
+  <app-shopping-cart></app-shopping-cart>
+  <app-shopping-summary></app-shopping-summary>
+</div>
